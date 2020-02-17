@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpbWllcyIsImlkIjoiNWU0YThjZmE5NThmNTM1MzJjNzRkZDcyIiwiaWF0IjoxNTgxOTQ5NDI4fQ.PZNLb-W6eakjTZy2kpoSuifIJ1ojf77JZ8EwNTwIIps
 
 {
-    "title": "makkara",
-    "author": "matias",
-    "url": "www.google.fi",
-    "likes": 73
+    "title": "kanakebab",
+    "author": "iivari",
+    "url": "www.kanakebab.com",
+    "likes": 13
 }

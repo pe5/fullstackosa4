@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/5e46979f1f11ad1ab0cd9677
+Content-Type: application/json
+
+{
+    "title": "sipuli",
+    "author": "keitto",
+    "url": "www.mackar.fi",
+    "likes": 3
+}

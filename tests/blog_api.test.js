@@ -55,10 +55,64 @@ test('a blog can be added ', async () => {
   const blogsAtEnd = await helper.blogsInDb()
   expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
 
-  const contents = blogsAtEnd.map(b => b.title)
-  expect(contents).toContain(
+  const title = blogsAtEnd.map(b => b.title)
+  expect(title).toContain(
     'test1'
   )
+})
+
+test('blog without likes is assigned 0 likes', async () => {
+  const newBlog = {
+    title: 'test1',
+    author: 'testdude',
+    url: 'test.test.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
+
+  const likes = blogsAtEnd.map(b => b.likes)
+  expect(likes[likes.length - 1]).toBe(0)
+})
+
+test('blog without title is not added', async () => {
+  const newBlog = {
+    author: 'testdude',
+    url: 'test.test.com',
+    likes: 12
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+})
+
+test('blog without url is not added', async () => {
+  const newBlog = {
+    title: 'testtitle',
+    author: 'testdude',
+    likes: 12
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
 })
 
 afterAll(() => {
